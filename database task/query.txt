@@ -1,0 +1,45 @@
+create database MIT;
+
+show databases;
+use mit;
+
+
+create table mech(roll_no int,name varchar(50),gender char);
+
+insert into mech values(1,'pooja','F'),(2,'vaishu','F'),(3,'rudra','M');
+
+select * from mech;
+
+create table civil(roll_no int,name varchar(50),gender char);
+
+insert into civil values(1,'arti','F'),(2,'maduri','F'),(3,'sarvesh','M');
+
+Select * from civil;
+ 
+ show tables;
+ 
+ select * from mech where roll_no = 1;
+ 
+ desc mech; select roll_no,name from mech;
+
+ alter table mech add( division varchar(5) default 'A');
+ select * from mech;
+ 
+ alter table mech modify column division varchar(10);
+ 
+ desc mech;
+ 
+ alter table mech change column roll_no roll int;
+ 
+ delete from mech where roll=2;
+ 
+ select * from mech;
+ 
+ 
+ update mech set division='B' where roll=3;
+ 
+ truncate table mech;
+ 
+ 
+ 
+ 

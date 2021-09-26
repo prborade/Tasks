@@ -1,0 +1,162 @@
+create database college;
+use college;
+
+show tables;
+
+create table stud(s_id int,s_name varchar(70),s_mail varchar(49),s_mark int,s_age int);
+
+insert into stud values(1,'pooja','pooja123@gmail.com',80,19),(2,'sanu','sanu12@gmail.com',50,29),
+                       (3,'anu','anu83@gmail.com',38,18),(4,'pooja','pooja123@gmail.com',77,23),
+                       (5,'pranita','pranita23@gmail.com',80,19),(6,'payal','payal123@gmail.com',75,25),
+                       (7,'pooja','pooja123@gmail.com',85,19);
+
+select s_name from stud;				
+select * from stud where s_age<20 AND s_mark<70;
+
+select * from stud where s_age<=20 || s_mark>=70;
+
+select * from stud where s_age<20 && s_mark<70;
+
+select * from stud where s_age<20 OR s_mark>70;
+
+select * from stud where s_id in(1,5);
+
+select * from stud where s_id  not in(1,5); 
+
+select * from stud where s_age != 19;
+select * from stud where s_age <> 19;
+
+select * from stud where s_id not in (4,5) and s_mark  between 40 and 90  and s_id not in(2,4);
+select * from stud where  s_mark  between 40 and 90  and s_id not in(2,4);
+
+select * from stud order by s_id desc;
+
+select * from stud order by s_id asc;
+
+select max(s_mark) from stud;
+select min(s_mark) from stud;
+select Count(s_mark) from stud;
+select Sum(s_mark) from stud;
+select Avg(s_mark) from stud;
+
+
+create table student(s_id int,s_name varchar(70),s_mail varchar(49),s_mark int,s_age int);
+
+insert into student values(1,'pooja','pooja123@gmail.com',80,19),(2,'sanu','sanu12@gmail.com',50,29),
+                       (3,'anu','anu83@gmail.com',38,18),(4,'pooja','pooja123@gmail.com',77,23),
+                       (5,'prajakta','prajakta23@gmail.com',80,19),(6,'payal','payal123@gmail.com',75,25),
+                       (7,'sonali','sonali123@gmail.com',85,19);
+
+
+select s_name from stud
+union 
+select s_name from student;
+ 
+ 
+ select s_name,s_mark ,
+ case 
+ when s_mark > 50 then 'studentn is average'
+ when s_mark < 50 then 'studentn is below average'
+ else 'all student are average'
+ end
+ as grade
+ from student;
+ 
+ /*constraint
+ 1)not null
+ 2)
+ 
+ */
+create table persons(
+  id int primary key,
+  lastname varchar(50) not null,
+  firstname varchar(40) not null,
+  age int
+ );
+
+desc persons;
+
+
+alter table persons 
+modify age int not null;
+
+insert into persons values(100,'borade','pooja',23),(101,'jadhav','kavita',20),(102,'raut','sonali',25);
+
+desc persons;
+
+alter table persons
+add unique (lastname);
+
+alter table persons;
+
+select * from persons; 
+
+create table order_t(
+order_id int not null,
+ordernumber int not null,
+id int,
+PRIMARY KEY (order_id),
+FOREIGN KEY (id) REFERENCES Persons(id)
+);
+
+insert into order_t values(1,5455,100),(2,6776,102),(3,7665,102);
+
+
+select * from order_t;
+
+select id,ordernumber from order_t;
+
+create table ru(name varchar(20), mobileno varchar(10));
+
+insert into ru values('pooja',8552904808),('neha',9546783256),('arti',9876543312),
+('amruta',1234567892),('mayuri',7658483990),('pratiksha',5678324356);
+
+select * from ru;
+
+select * from ru where name like 'p%';
+select * from ru where name like 'n%' or name like 'm%';
+select * from ru where name like '_a%';
+select * from ru where name like '%u%';
+
+
+create view ruy as
+select name,mobileno
+from ru 
+where name='neha';
+
+create or replace view uy as
+select name,mobileno
+from ru 
+where name='neha';
+
+select * from uy;
+
+
+
+create database main1;
+use main1;
+
+create table jo(id int(5),fullname varchar(50));
+insert into jo values(1,'sakshi mishra'),(2,'rakhi savant'),
+(3,'mahi patil'),(4,'sonali raut'),(5,'kavita jadhav'),(6,'rohit aher');
+
+select * from jo;
+
+create table jo2(id varchar(15),email varchar(50));
+insert into jo2 values(1,'sakshi@gmail.com'),(2,'rakhi@gmail.com'),
+(3,'mahi patil'),(4,'sonaliraut@gmail.com'),(9,'kavitajadhav@gmail.com'),(6,'rohit@gmail.com');
+
+select * from jo cross join jo2;
+select * from jo2;
+
+select * from jo 
+inner join
+jo2
+where jo.id=jo2.id;
+
+select fullname,email from jo natural join jo2;
+
+select * from jo left outer join jo2 on jo.id = jo2.id;
+
+select * from jo right outer join jo2 on jo.id = jo2.id;
+
